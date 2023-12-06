@@ -10,7 +10,7 @@ def http_bot(prompt):
     pload = {
         "prompt": prompt,
         "stream": True,
-        "max_tokens": 128,
+        "max_tokens": 65536,
     }
     response = requests.post(args.model_url,
                              headers=headers,

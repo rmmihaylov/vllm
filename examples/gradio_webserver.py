@@ -5,12 +5,24 @@ import gradio as gr
 import requests
 
 
+def make_prompt(instruction):
+    return f"""You are an AI programming assistant, utilizing the Deepseek Coder model, developed by Deepseek Company, and you only answer questions related to computer science. For politically sensitive questions, security and privacy issues, and other non-computer science questions, you will refuse to answer
+### Instruction:
+{instruction}
+### Response:
+"""
+
+
 def http_bot(prompt):
     headers = {"User-Agent": "vLLM Client"}
     pload = {
-        "prompt": prompt,
+        "prompt": make_prompt(prompt),
         "stream": True,
-        "max_tokens": 65536,
+        "max_tokens": 16000,
+        "top_k": 50, 
+        "top_p": 0.95, 
+        "n": 1,
+        "use_beam_search": False
     }
     response = requests.post(args.model_url,
                              headers=headers,

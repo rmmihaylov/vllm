@@ -22,7 +22,9 @@ def http_bot(prompt):
         "top_k": 50, 
         "top_p": 0.95, 
         "n": 1,
-        "use_beam_search": False
+        "use_beam_search": False,
+        "stop_token_ids": [32021],
+        "skip_special_tokens": True
     }
     response = requests.post(args.model_url,
                              headers=headers,
